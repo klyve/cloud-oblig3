@@ -7,29 +7,6 @@ import (
 	"net/http"
 )
 
-func PrintData() {
-	l := FetchLatest()
-	latest := l.As("NOK")
-	fmt.Printf("Base %s \n", latest.Base)
-	fmt.Printf("Date %s \n", latest.Date)
-	for key, val := range latest.Rates {
-		fmt.Printf("%s => %f \n", key, val)
-	}
-}
-
-func PrintTo() {
-	l := FetchLatest()
-	latest := l.From("NOK")
-	PrintD(latest.To("SEK"))
-	PrintD(latest.To("EUR"))
-	PrintD(latest.To("CAD"))
-}
-func PrintD(curr Convertion) {
-	fmt.Printf("From %s To %s\n", curr.From, curr.To)
-	fmt.Printf("Value1 %f Value2 %f\n", curr.FromValue, curr.ToValue)
-	fmt.Printf("Rate %f\n\n", curr.Rate)
-}
-
 func FormatJsonResponse(data []byte) DataList {
 	var jsontype DataList
 	jsonError := json.Unmarshal(data, &jsontype)
