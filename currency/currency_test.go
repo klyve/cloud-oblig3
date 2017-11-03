@@ -32,7 +32,7 @@ func TestFormatJson(t *testing.T) {
 	}
 	data := FormatJsonResponse(file)
 	if len(data.Rates) != 31 {
-		fmt.Printf("Failed to parse rates expected 31 got %s", len(data.Rates))
+		fmt.Printf("Failed to parse rates expected 31 got %v", len(data.Rates))
 		t.Fail()
 	}
 	if data.Base != "EUR" {
@@ -52,7 +52,7 @@ func TestDataIntegrity(t *testing.T) {
 	data := readTestFile(t)
 
 	if len(data.Rates) != 31 {
-		fmt.Printf("Failed to parse rates expected 31 got %s", len(data.Rates))
+		fmt.Printf("Failed to parse rates expected 31 got %v", len(data.Rates))
 		t.Fail()
 	}
 	if data.Base != "EUR" {
@@ -73,7 +73,7 @@ func TestDataFetchIntegrity(t *testing.T) {
 	data := FetchLatest()
 
 	if len(data.Rates) == 0 {
-		fmt.Printf("Failed to parse rates expected 31 got %s", len(data.Rates))
+		fmt.Printf("Failed to parse rates expected 31 got %v", len(data.Rates))
 		t.Fail()
 	}
 	if data.Base != "EUR" {
@@ -90,7 +90,7 @@ func TestFetchJSONData(t *testing.T) {
 	}
 	data := FormatJsonResponse(body)
 	if len(data.Rates) == 0 {
-		fmt.Printf("Failed to parse rates expected 31 got %s", len(data.Rates))
+		fmt.Printf("Failed to parse rates expected 31 got %v", len(data.Rates))
 		t.Fail()
 	}
 	if data.Base != "EUR" {
@@ -104,7 +104,7 @@ func TestCurrencyAs(t *testing.T) {
 	data := core.As("NOK")
 
 	if len(data.Rates) != 31 {
-		fmt.Printf("Failed to parse rates expected 31 got %s", len(data.Rates))
+		fmt.Printf("Failed to parse rates expected 31 got %v", len(data.Rates))
 		t.Fail()
 	}
 	if data.Base != "NOK" {
@@ -123,7 +123,7 @@ func TestCurrencyFrom(t *testing.T) {
 	data := core.From("NOK")
 
 	if len(data.Rates) != 31 {
-		fmt.Printf("Failed to parse rates expected 31 got %s", len(data.Rates))
+		fmt.Printf("Failed to parse rates expected 31 got %v", len(data.Rates))
 		t.Fail()
 	}
 	if data.Base != "NOK" {
