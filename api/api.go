@@ -22,6 +22,11 @@ func Init(router *mux.Router, db *mgo.Database) {
 	router.HandleFunc("/exchange/latest", GetLatestRates).Methods("POST")
 	router.HandleFunc("/exchange/evaluationtrigger", TestHooks).Methods("GET")
 	router.HandleFunc("/exchange/average", AverageRates).Methods("POST")
+
+	// DIRTY
+	router.HandleFunc("/exchange/average", GetExchange).Methods("GET")
+	router.HandleFunc("/exchange/latest", GetExchange).Methods("GET")
+
 	router.HandleFunc("/exchange/{id}", GetWebhookData).Methods("GET")
 	router.HandleFunc("/exchange/{id}", DeleteWebhook).Methods("DELETE")
 }
