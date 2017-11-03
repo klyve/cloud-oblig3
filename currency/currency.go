@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+// FormatJsonResponse currency
 func FormatJsonResponse(data []byte) DataList {
 	var jsontype DataList
 	jsonError := json.Unmarshal(data, &jsontype)
@@ -15,6 +16,8 @@ func FormatJsonResponse(data []byte) DataList {
 	}
 	return jsontype
 }
+
+// FetchLatest currency
 func FetchLatest() DataList {
 	body, err := FetchJSONData("http://api.fixer.io/latest")
 	if err != nil {

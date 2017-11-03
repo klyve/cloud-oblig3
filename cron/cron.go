@@ -15,15 +15,18 @@ import (
 var collection *mgo.Collection
 var database *mgo.Database
 
+// Init cron jobs
 func Init(db *mgo.Database) {
 	collection = db.C("currency")
 	database = db
 
 	c := cron.New()
-	// c.AddFunc("@every 5s", CronJob)
+	CronJob()
+	c.AddFunc("@every 24h", CronJob)
 	c.Start()
 }
 
+// CronJob item
 func CronJob() {
 	latest := currency.FetchLatest()
 	data := currency.Currency{

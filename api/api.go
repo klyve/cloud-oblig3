@@ -14,6 +14,7 @@ import (
 
 var database *mgo.Database
 
+// Init the api
 func Init(router *mux.Router, db *mgo.Database) {
 	database = db
 	router.HandleFunc("/exchange", GetExchange).Methods("GET")
@@ -25,6 +26,7 @@ func Init(router *mux.Router, db *mgo.Database) {
 	router.HandleFunc("/exchange/{id}", DeleteWebhook).Methods("DELETE")
 }
 
+// AverageRates api
 func AverageRates(w http.ResponseWriter, r *http.Request) {
 	var latest LatestRates
 	decoder := json.NewDecoder(r.Body)
@@ -50,6 +52,7 @@ func AverageRates(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, avg/7)
 }
 
+// InvokeWebHook api
 func InvokeWebHook(curr currency.Convertion, item WebHook) {
 	inv := WebHookInvoked{
 		BaseCurrency:    curr.From,
@@ -66,6 +69,7 @@ func InvokeWebHook(curr currency.Convertion, item WebHook) {
 	}
 }
 
+// TestHooks api
 func TestHooks(w http.ResponseWriter, r *http.Request) {
 	var curr currency.DataList
 	err2 := database.C("currency").Find(nil).Sort("_id").One(&curr)
@@ -90,6 +94,7 @@ func TestHooks(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Invoking webooks")
 }
 
+// GetLatestRates api
 func GetLatestRates(w http.ResponseWriter, r *http.Request) {
 	var latest LatestRates
 	decoder := json.NewDecoder(r.Body)
@@ -103,7 +108,6 @@ func GetLatestRates(w http.ResponseWriter, r *http.Request) {
 	var curr currency.DataList
 	err2 := database.C("currency").Find(nil).Sort("-_id").One(&curr)
 
-	fmt.Println(err2)
 	if err2 != nil {
 		ErrorWithJSON(w, "Internal error", http.StatusInternalServerError)
 		return
@@ -112,12 +116,12 @@ func GetLatestRates(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, rate.Rate)
 }
 
+// DeleteWebhook api
 func DeleteWebhook(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	var webhook WebHook
 	recordId := bson.ObjectIdHex(vars["id"])
 	err := database.C("webhooks").FindId(recordId).One(&webhook)
-	fmt.Println(err)
 
 	if err != nil {
 		ErrorWithJSON(w, "Not found", http.StatusNotFound)
@@ -126,30 +130,32 @@ func DeleteWebhook(w http.ResponseWriter, r *http.Request) {
 		if err2 != nil {
 			ErrorWithJSON(w, "Internal server error", http.StatusInternalServerError)
 		} else {
-			WriteJsonResponse(w, webhook)
+			WriteJSONResponse(w, webhook)
 		}
 
 	}
 }
 
+// GetWebhookData api
 func GetWebhookData(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	var webhook WebHook
 	recordId := bson.ObjectIdHex(vars["id"])
 	err := database.C("webhooks").FindId(recordId).One(&webhook)
-	fmt.Println(err)
 
 	if err != nil {
 		ErrorWithJSON(w, "Not found", http.StatusNotFound)
 	} else {
-		WriteJsonResponse(w, webhook)
+		WriteJSONResponse(w, webhook)
 	}
 }
 
+// AverageGetExchangeRates api
 func GetExchange(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello Exchange")
 }
 
+// PostExchange api
 func PostExchange(w http.ResponseWriter, r *http.Request) {
 
 	var webhook WebHook
@@ -164,9 +170,11 @@ func PostExchange(w http.ResponseWriter, r *http.Request) {
 
 	database.C("webhooks").Insert(webhook)
 
-	fmt.Fprintf(w, "Hello Exchange Post %s", webhook.ID.Hex())
+	fmt.Fprintf(w, webhook.ID.Hex())
 }
-func WriteJsonResponse(w http.ResponseWriter, response interface{}) {
+
+// WriteJSONResponse api
+func WriteJSONResponse(w http.ResponseWriter, response interface{}) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
 	output, err := json.MarshalIndent(response, "", "    ")
@@ -177,6 +185,8 @@ func WriteJsonResponse(w http.ResponseWriter, response interface{}) {
 	}
 
 }
+
+// ErrorWithJSON api
 func ErrorWithJSON(w http.ResponseWriter, message string, code int) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(code)

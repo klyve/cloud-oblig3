@@ -16,11 +16,13 @@ type Config struct {
 	Port int
 }
 
+// GetHomePage Endpoint
 func GetHomePage(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "Hello world")
 }
 
-func Init() {
+// Init the app
+func Init(prod bool) {
 	// cron.Init()
 	router := mux.NewRouter()
 
@@ -42,10 +44,13 @@ func Init() {
 	cron.Init(database)
 	api.Init(router, database)
 
-	log.Fatal(http.ListenAndServe(portAddr, router))
-	fmt.Printf("Connected on port %s", p)
+	if prod == true {
+		log.Fatal(http.ListenAndServe(portAddr, router))
+		fmt.Printf("Connected on port %s", p)
+	}
 }
 
+// Main entrypoint
 func main() {
-	Init()
+	Init(true)
 }
