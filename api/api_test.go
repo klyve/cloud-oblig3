@@ -70,7 +70,7 @@ func TestSetup(t *testing.T) {
 func TestHelloWorld(t *testing.T) {
 	setup()
 
-	req, err := http.NewRequest("GET", "/exchange", nil)
+	req, err := http.NewRequest("GET", "/exchange/", nil)
 	if err != nil {
 		t.Fatal("Creating 'GET /exchange' request failed!")
 	}
@@ -95,7 +95,7 @@ func TestWebhook(t *testing.T) {
 	}
 	data := new(bytes.Buffer)
 	json.NewEncoder(data).Encode(hook)
-	req, err := http.NewRequest("POST", "/exchange", data)
+	req, err := http.NewRequest("POST", "/exchange/", data)
 	if err != nil {
 		t.Fatal("Creating 'POST /exchange' request failed!")
 	}
