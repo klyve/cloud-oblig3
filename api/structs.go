@@ -50,3 +50,9 @@ type DataListTest struct {
 	Date  string             `json:"date"`
 	Rates map[string]float32 `json:"rates"`
 }
+
+// ErrorCode data type
+type ErrorCode struct {
+	Message string `json:"message"`
+	Code    int    `json:"code"`
+}

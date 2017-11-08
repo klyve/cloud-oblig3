@@ -193,7 +193,19 @@ func WriteJSONResponse(w http.ResponseWriter, response interface{}) {
 
 // ErrorWithJSON api
 func ErrorWithJSON(w http.ResponseWriter, message string, code int) {
+
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(code)
-	fmt.Fprintf(w, "{message: %s}", message)
+
+	var errorMsg ErrorCode
+	errorMsg.Message = message
+	errorMsg.Code = code
+
+	output, err := json.MarshalIndent(errorMsg, "", "    ")
+
+	if err != nil {
+		ErrorWithJSON(w, "Internal server Error", http.StatusInternalServerError)
+	} else {
+		fmt.Fprintf(w, string(output))
+	}
 }
