@@ -17,8 +17,8 @@ var database *mgo.Database
 // Init the api
 func Init(router *mux.Router, db *mgo.Database) {
 	database = db
-	router.HandleFunc("/exchange", GetExchange).Methods("GET")
-	router.HandleFunc("/exchange", PostExchange).Methods("POST")
+	router.HandleFunc("/exchange/", GetExchange).Methods("GET")
+	router.HandleFunc("/exchange/", PostExchange).Methods("POST")
 	router.HandleFunc("/exchange/latest", GetLatestRates).Methods("POST")
 	router.HandleFunc("/exchange/evaluationtrigger", TestHooks).Methods("GET")
 	router.HandleFunc("/exchange/average", AverageRates).Methods("POST")
