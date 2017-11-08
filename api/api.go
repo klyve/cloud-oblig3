@@ -125,13 +125,17 @@ func GetLatestRates(w http.ResponseWriter, r *http.Request) {
 func DeleteWebhook(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	var webhook WebHook
-	recordId := bson.ObjectIdHex(vars["id"])
-	err := database.C("webhooks").FindId(recordId).One(&webhook)
+	if !bson.IsObjectIdHex(vars["id"]) {
+		ErrorWithJSON(w, "Invalid ID", 400)
+		return
+	}
+	recordID := bson.ObjectIdHex(vars["id"])
+	err := database.C("webhooks").FindId(recordID).One(&webhook)
 
 	if err != nil {
 		ErrorWithJSON(w, "Not found", http.StatusNotFound)
 	} else {
-		err2 := database.C("webhooks").RemoveId(recordId)
+		err2 := database.C("webhooks").RemoveId(recordID)
 		if err2 != nil {
 			ErrorWithJSON(w, "Internal server error", http.StatusInternalServerError)
 		} else {
@@ -145,8 +149,14 @@ func DeleteWebhook(w http.ResponseWriter, r *http.Request) {
 func GetWebhookData(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	var webhook WebHook
-	recordId := bson.ObjectIdHex(vars["id"])
-	err := database.C("webhooks").FindId(recordId).One(&webhook)
+
+	if !bson.IsObjectIdHex(vars["id"]) {
+		ErrorWithJSON(w, "Invalid ID", 400)
+		return
+	}
+	recordID := bson.ObjectIdHex(vars["id"])
+
+	err := database.C("webhooks").FindId(recordID).One(&webhook)
 
 	if err != nil {
 		ErrorWithJSON(w, "Not found", http.StatusNotFound)
