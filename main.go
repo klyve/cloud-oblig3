@@ -9,6 +9,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/klyve/cloud-oblig2/api"
 	"github.com/klyve/cloud-oblig2/cron"
+	"github.com/klyve/cloud-oblig3/bot"
 	"gopkg.in/mgo.v2"
 )
 
@@ -43,7 +44,7 @@ func Init(prod bool) {
 	database := session.DB("oblig2")
 	cron.Init(database)
 	api.Init(router, database)
-
+	bot.Init(router, database)
 	if prod == true {
 		log.Fatal(http.ListenAndServe(portAddr, router))
 		fmt.Printf("Connected on port %s", p)
