@@ -1,0 +1,13 @@
+{
+    "name": "test",
+    "messages": [
+        "Hello %s",
+        "Hello What a wonderful day, %s"
+    ],
+    "triggers": [
+        "hello"
+    ],
+    "route": [
+        "fetchLatest"
+    ]
+}
