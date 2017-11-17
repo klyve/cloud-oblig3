@@ -61,7 +61,7 @@ type Recipient struct {
 // ReturnStruct struct
 type ReturnStruct struct {
 	MessagingType string        `json:"messaging_type"`
-	Recipient     Recipient     `json:"recipient"`
+	Recipient     Sender        `json:"recipient"`
 	Message       ReturnMessage `json:"message"`
 }
 
