@@ -87,7 +87,7 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 		} else {
 			routesData := RouterData{
 				Data: map[string]string{
-					"username":       "Bjarte",
+					"username":       user.FirstName,
 					"baseCurrency":   query.Result.Parameters.BaseCurrency,
 					"targetCurrency": query.Result.Parameters.TargetCurrency,
 					"amount":         query.Result.Parameters.Amount,
