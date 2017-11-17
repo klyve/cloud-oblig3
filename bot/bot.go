@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/klyve/cloud-oblig3/api"
@@ -78,7 +77,23 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 		data.Message.Text = msg.Message
 		// data.Message.Text = "I have no idea what you are talking about you goon."
 	} else {
-		data.Message.Text = "The answer is 284." + " I'm " + strconv.FormatFloat(query.Result.Score*100, 'g', 100, 32) + `% certain I understood your question right`
+
+		recipe := FindRecipe(query.Result.Metadata.IntentName)
+		if recipe.Name == "" {
+			data.Message.Text = "No recipe for this"
+		} else {
+			routesData := RouterData{
+				Data: map[string]string{
+					"username":       "Bjarte",
+					"baseCurrency":   query.Result.Parameters.BaseCurrency,
+					"targetCurrency": query.Result.Parameters.TargetCurrency,
+					"amount":         query.Result.Parameters.Amount,
+				},
+			}
+			msg := Route(recipe, routesData)
+			data.Message.Text = msg.Message
+			// data.Message.Text = "The answer is 284." + " I'm " + strconv.FormatFloat(query.Result.Score*100, 'g', 100, 32) + `% certain I understood your question right`
+		}
 
 	}
 
