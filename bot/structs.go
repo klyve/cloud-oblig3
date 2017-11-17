@@ -15,10 +15,10 @@ type Entries struct {
 
 // Messaging struct forn data from facebook
 type Messaging struct {
-	Sender    map[string]string `json:"sender"`
-	Recipient map[string]string `json:"recipient"`
-	Timestamp int64             `json:"timestamp"`
-	Message   Message           `json:"message"`
+	Sender    Sender    `json:"sender"`
+	Recipient Recipient `json:"recipient"`
+	Timestamp int64     `json:"timestamp"`
+	Message   Message   `json:"message"`
 }
 
 // Message struct
@@ -28,27 +28,24 @@ type Message struct {
 	Text string `json:"text"`
 }
 
-//   "object": "page",
-//   "entry": [
-//     {
-//       "id": "146560019406297",
-//       "time": 1510878676820,
-//       "messaging": [
-//         {
-//           "sender": {
-//             "id": "1536356476448699"
-//           },
-//           "recipient": {
-//             "id": "146560019406297"
-//           },
-//           "timestamp": 1510878675989,
-//           "message": {
-//             "mid": "mid.$cAADfuGqZvYpl-KhMFVfx2MDyvN3F",
-//             "seq": 1424515,
-//             "text": "hello"
-//           }
-//         }
-//       ]
-//     }
-//   ]
-// }
+// Sender struct
+type Sender struct {
+	ID string `json:"id"`
+}
+
+// Recipient struct
+type Recipient struct {
+	ID string `json:"id"`
+}
+
+// ReturnStruct struct
+type ReturnStruct struct {
+	MessagingType string        `json:"messaging_type"`
+	Recipient     Recipient     `json:"recipient"`
+	Message       ReturnMessage `json:"message"`
+}
+
+// ReturnMessage struct
+type ReturnMessage struct {
+	Text string `json:text`
+}

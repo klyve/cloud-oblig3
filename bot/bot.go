@@ -35,5 +35,10 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	api.WriteJSONResponse(w, fbhook)
+	var data ReturnStruct
+	data.MessagingType = "Standard Messaging"
+	data.Recipient = fbhook.Entry[0].Messaging[0].Recipient
+	data.Message.Text = "Whaddup my nigguh!!"
+
+	api.WriteJSONResponse(w, data)
 }
