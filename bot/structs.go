@@ -101,3 +101,8 @@ type DialogFlowParameters struct {
 type DialogFlowMetadata struct {
 	IntentName string `json:"intentName"`
 }
+
+type FBUser struct {
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+}
