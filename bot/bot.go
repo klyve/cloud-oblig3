@@ -1,6 +1,7 @@
 package bot
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -46,7 +47,19 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// TEST RESPONSE
+	// Making and parsing response
+	message := DialogFlowQuery{
+		Language:  "en",
+		Message:   fbhook.Entry[0].Messaging[0].Message.Text,
+		SessionID: fbhook.Entry[0].Messaging[0].Sender.ID,
+	}
+
+	query, err := parseQuery(message)
+	if err != nil {
+		fmt.Print(err)
+		api.ErrorWithJSON(w, "Internal error", http.StatusInternalServerError)
+		return
+	}
 
 	var data FBReturnStruct
 
@@ -59,8 +72,30 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 	api.WriteJSONResponse(w, data)
 }
 
-func parseQuery(query DialogFlowQuery) DialogFlowResponse {
+// parseQuery parses messages to parameters
+func parseQuery(query DialogFlowQuery) (DialogFlowResponse, error) {
+	data := new(bytes.Buffer)
+	var result DialogFlowResponse
+	var err error = nil
+	var Client = &http.Client{}
 
+	json.NewEncoder(data).Encode(query)
+
+	req, err := http.NewRequest("POST", "https://api.dialogflow.com/v1/query", data)
+	if err != nil {
+		return result, err
+	}
+	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.Header.Set("Authorization", "Bearer 8f67b21441414cf7853e8d850789cb5f")
+
+	res, err := Client.Do(req)
+	if err != nil {
+		return result, err
+	}
+
+	json.NewDecoder(res.Body).Decode(&result)
+
+	return result, err
 }
 
 // HelloBot for testing
