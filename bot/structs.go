@@ -70,9 +70,26 @@ type FBReturnMessage struct {
 	Text string `json:"text"`
 }
 
-//DialogFlow struct
-type DialogFlowForward struct {
-	lang      string `json:"lang"`
-	query     string `json:"query"`
-	sessionId string `json:"sessionId"`
+//DialogFlowForward struct
+type DialogFlowQuery struct {
+	Language  string `json:"lang"`
+	Message   string `json:"query"`
+	SessionID string `json:"sessionId"`
+}
+
+//DialogFlowRespomse struct
+type DialogFlowResponse struct {
+	Result    DialogFlowResult `json:"result"`
+	SessionID string           `json:"sessionId"`
+}
+
+type DialogFlowResult struct {
+	Parameters DialogFlowParameters `json:"result"`
+	Score      float32              `json:"score"`
+}
+
+type DialogFlowParameters struct {
+	Amount         float32 `json:"amount"`
+	BaseCurrency   string  `json:"currency-from"`
+	TargetCurrency string  `json:"currency-to"`
 }

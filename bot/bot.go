@@ -40,11 +40,13 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err2 := database.C("messages").Insert(fbhook)
-	if err2 != nil {
+	err = database.C("messages").Insert(fbhook)
+	if err != nil {
 		api.ErrorWithJSON(w, "Internal error", http.StatusInternalServerError)
 		return
 	}
+
+	// TEST RESPONSE
 
 	var data FBReturnStruct
 
@@ -55,6 +57,10 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 	sendResponse(data)
 
 	api.WriteJSONResponse(w, data)
+}
+
+func parseQuery(query DialogFlowQuery) {
+
 }
 
 // HelloBot for testing
