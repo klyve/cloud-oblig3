@@ -15,8 +15,8 @@ var database *mgo.Database
 // Init bot
 func Init(router *mux.Router, db *mgo.Database) {
 	database = db
-	router.HandleFunc("/bot/", FacebookWebHook).Methods("POST")
-	router.HandleFunc("/bot/", HelloBot).Methods("GET")
+	router.HandleFunc("/bot", FacebookWebHook).Methods("POST")
+	router.HandleFunc("/bot", HelloBot).Methods("GET")
 }
 
 // FacebookWebHook handler for Facebook Webook events
@@ -37,9 +37,12 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var data ReturnStruct
+
 	data.MessagingType = "Standard Messaging"
 	data.Recipient = fbhook.Entry[0].Messaging[0].Recipient
 	data.Message.Text = "Whaddup my nigguh!!"
+
+	sendResponse(data)
 
 	api.WriteJSONResponse(w, data)
 }
@@ -50,4 +53,15 @@ func HelloBot(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(200)
 
 	fmt.Fprintln(w, "Hello world")
+}
+
+// sendResponse sends response to user or returns error
+func sendResponse(data ReturnStruct) {
+	url := "https://graph.facebook.com/v2.6/me/messages?access_token=EAAdVwoaYHFgBADZCsmyG5e87NUL6ardZBVEDmFFPPIyZAifF1hMLaKpdqQuwZCcQmI4tCgNvEiGG0bwsPZCbsqZCGNZBphG4N8VZAAtLkRXjPzAdI6KGYpGLFXppwUuZAaBN8ibZCoQWX0eZCDdV9V3ZAMOmEYeALRjbZCWnHJE2GZAm9RsgZDZD"
+	output, err := json.MarshalIndent(data, "", "    ")
+	if err != nil {
+		return
+	}
+
+	http.Post(url, string(output), nil)
 }
