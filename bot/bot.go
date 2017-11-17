@@ -2,6 +2,7 @@ package bot
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/cloud-oblig3/api"
@@ -15,7 +16,7 @@ var database *mgo.Database
 func Init(router *mux.Router, db *mgo.Database) {
 	database = db
 	router.HandleFunc("/bot/", FacebookWebHook).Methods("POST")
-
+	router.HandleFunc("/bot/", HelloBot).Methods("GET")
 }
 
 // FacebookWebHook handler for Facebook Webook events
@@ -41,4 +42,12 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 	data.Message.Text = "Whaddup my nigguh!!"
 
 	api.WriteJSONResponse(w, data)
+}
+
+// HelloBot for testing
+func HelloBot(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+
+	fmt.Fprintln(w, "Hello world")
 }

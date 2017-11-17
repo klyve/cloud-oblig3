@@ -47,5 +47,5 @@ type ReturnStruct struct {
 
 // ReturnMessage struct
 type ReturnMessage struct {
-	Text string `json:text`
+	Text string `json:"text"`
 }
