@@ -58,14 +58,21 @@ type Recipient struct {
 	ID string `json:"id"`
 }
 
-// ReturnStruct struct
-type ReturnStruct struct {
-	MessagingType string        `json:"messaging_type"`
-	Recipient     Recipient     `json:"recipient"`
-	Message       ReturnMessage `json:"message"`
+// FBReturnStruct struct
+type FBReturnStruct struct {
+	MessagingType string          `json:"messaging_type"`
+	Recipient     Recipient       `json:"recipient"`
+	Message       FBReturnMessage `json:"message"`
 }
 
-// ReturnMessage struct
-type ReturnMessage struct {
+// FBReturnMessage struct
+type FBReturnMessage struct {
 	Text string `json:"text"`
+}
+
+//DialogFlow struct
+type DialogFlowForward struct {
+	lang      string `json:"lang"`
+	query     string `json:"query"`
+	sessionId string `json:"sessionId"`
 }

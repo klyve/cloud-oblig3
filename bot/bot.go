@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/cloud-oblig3/api"
 	"github.com/gorilla/mux"
+	"github.com/klyve/cloud-oblig3/api"
 	"gopkg.in/mgo.v2"
 )
 
@@ -46,7 +46,7 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var data ReturnStruct
+	var data FBReturnStruct
 
 	data.MessagingType = "Standard Messaging"
 	data.Recipient = fbhook.Entry[0].Messaging[0].Recipient
@@ -66,7 +66,7 @@ func HelloBot(w http.ResponseWriter, r *http.Request) {
 }
 
 // sendResponse sends response to user or returns error
-func sendResponse(data ReturnStruct) {
+func sendResponse(data FBReturnStruct) {
 	url := "https://graph.facebook.com/v2.6/me/messages?access_token=EAAdVwoaYHFgBADZCsmyG5e87NUL6ardZBVEDmFFPPIyZAifF1hMLaKpdqQuwZCcQmI4tCgNvEiGG0bwsPZCbsqZCGNZBphG4N8VZAAtLkRXjPzAdI6KGYpGLFXppwUuZAaBN8ibZCoQWX0eZCDdV9V3ZAMOmEYeALRjbZCWnHJE2GZAm9RsgZDZD"
 	output, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
