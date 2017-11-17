@@ -1,6 +1,7 @@
 package bot
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -16,7 +17,10 @@ var database *mgo.Database
 func Init(router *mux.Router, db *mgo.Database) {
 	database = db
 	router.HandleFunc("/bot", FacebookWebHook).Methods("POST")
-	router.HandleFunc("/bot", HelloBot).Methods("GET")
+	router.HandleFunc("/bot", FaceBookVerification).Queries(
+		"hub.mode", "{hub.mode}",
+		"hub.challenge", "{hub.challenge}",
+		"hub.verify_token", "{hub.verify_token}").Methods("GET")
 }
 
 // FacebookWebHook handler for Facebook Webook events
@@ -38,30 +42,52 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 
 	var data ReturnStruct
 
-	data.MessagingType = "Standard Messaging"
-	data.Recipient = fbhook.Entry[0].Messaging[0].Recipient
-	data.Message.Text = "Whaddup my nigguh!!"
+	data.MessagingType = "RESPONSE"
+	data.Recipient = fbhook.Entry[0].Messaging[0].Sender
+	data.Message.Text = fbhook.Entry[0].Messaging[0].Message.Text + " in my ass!"
 
 	sendResponse(data)
 
 	api.WriteJSONResponse(w, data)
 }
 
-// HelloBot for testing
-func HelloBot(w http.ResponseWriter, r *http.Request) {
+// FaceBookVerification for testing
+func FaceBookVerification(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
 
-	fmt.Fprintln(w, "Hello world")
+	challenge := r.FormValue("hub.challenge")
+
+	fmt.Fprint(w, challenge)
 }
 
 // sendResponse sends response to user or returns error
-func sendResponse(data ReturnStruct) {
-	url := "https://graph.facebook.com/v2.6/me/messages?access_token=EAAdVwoaYHFgBADZCsmyG5e87NUL6ardZBVEDmFFPPIyZAifF1hMLaKpdqQuwZCcQmI4tCgNvEiGG0bwsPZCbsqZCGNZBphG4N8VZAAtLkRXjPzAdI6KGYpGLFXppwUuZAaBN8ibZCoQWX0eZCDdV9V3ZAMOmEYeALRjbZCWnHJE2GZAm9RsgZDZD"
-	output, err := json.MarshalIndent(data, "", "    ")
+func sendResponse(ret ReturnStruct) {
+	url := "https://graph.facebook.com/v2.6/me/messages?access_token=EAAdVwoaYHFgBAEUB6PRttLApccGXpgVxnXYZA3ZBb6r7ijRjkMfxL2B8sCZC6d4kicG5pqocZCZBtVHGxBUxy4qxv1cSn2bt6ZAFyvn4iFagMwpest5YOkFWma0UC1b69rHE19PlpswRipZBXcXA484Tp6Qg1BDasfP4zwvuUjo1wZDZD"
+
+	data := new(bytes.Buffer)
+	var result interface{}
+	var err error
+	var Client = &http.Client{}
+
+	json.NewEncoder(data).Encode(ret)
+
+	req, err := http.NewRequest("POST", url, data)
 	if err != nil {
+		fmt.Print(err)
 		return
 	}
 
-	http.Post(url, string(output), nil)
+	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.Header.Set("messaging_type", "RESPONSE")
+
+	res, err := Client.Do(req)
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
+
+	json.NewDecoder(res.Body).Decode(&result)
+
+	fmt.Print(result)
 }
