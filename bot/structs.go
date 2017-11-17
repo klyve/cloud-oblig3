@@ -18,6 +18,7 @@ type ErrorInterface struct {
 type RouterData struct {
 	Message string
 	Count   int
+	Data    map[string]string
 }
 
 // FBWebHook struct for data from Facebook

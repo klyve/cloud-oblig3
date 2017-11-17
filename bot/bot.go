@@ -20,8 +20,8 @@ func Init(router *mux.Router, db *mgo.Database) {
 
 	LoadRecipes()
 	CreateRoutes()
-	recipe := FindRecipe("hello")
-	Route(recipe)
+	// recipe := FindRecipe("hello")
+	// Route(recipe)
 
 	router.HandleFunc("/bot", FacebookWebHook).Methods("POST")
 	router.HandleFunc("/bot", FaceBookVerification).Queries(
@@ -55,6 +55,7 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 	}
 
 	query, err := parseQuery(message)
+
 	if err != nil {
 		api.ErrorWithJSON(w, "Internal error", http.StatusInternalServerError)
 		return
@@ -66,7 +67,20 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 
 	data.MessagingType = "RESPONSE"
 	data.Recipient = fbhook.Entry[0].Messaging[0].Sender
-	data.Message.Text = "The answer is 284." + " I'm " + strconv.FormatFloat(query.Result.Score*100, 'g', 100, 32) + `% certain I understood your question right`
+	if query.Result.Score == 0 {
+		recipe := FindRecipe("404")
+		routeData := RouterData{
+			Data: map[string]string{"username": "Bjarte"},
+		}
+		fmt.Println(routeData.Data["username"])
+		// routeData.Data["username"] = "Bjarte"
+		msg := Route(recipe, routeData)
+		data.Message.Text = msg.Message
+		// data.Message.Text = "I have no idea what you are talking about you goon."
+	} else {
+		data.Message.Text = "The answer is 284." + " I'm " + strconv.FormatFloat(query.Result.Score*100, 'g', 100, 32) + `% certain I understood your question right`
+
+	}
 
 	sendResponse(data)
 

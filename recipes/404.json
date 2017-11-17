@@ -1,0 +1,14 @@
+{
+    "name": "404",
+    "messages": [
+        "You fool, What are you talking about???? {0}",
+        "You are an idiot {0}",
+        "What the fuck are you doing {0}"
+    ],
+    "triggers": [
+        "404"
+    ],
+    "route": [
+        "replaceUsername"
+    ]
+}
