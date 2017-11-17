@@ -1,9 +1,19 @@
 {
     "name": "404",
     "messages": [
-        "You fool, What are you talking about???? {0}",
+        "You fool, What are you talking about {0}?",
         "You are an idiot {0}",
         "What the fuck are you doing {0}"
+        "{0}, you trippin fool!"
+        "I'm straight outta Comptom, but I don't get what you're saying! {0}"
+        "Get your shit straight {0}!"
+        "You what {0}?"
+        "You're talking shit {0}!"
+        "You chattin shit {0}?"
+        "Get your shit together {0}!"
+        "What you talking about {0}?"
+        "God dammit {0}! Focus!"
+        "I didn't get that {0}, you idiot!"
     ],
     "triggers": [
         "404"
