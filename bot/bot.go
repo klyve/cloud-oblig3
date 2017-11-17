@@ -47,7 +47,7 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Making and parsing response
+	// Parsing response
 	message := DialogFlowQuery{
 		Language:  "en",
 		Message:   fbhook.Entry[0].Messaging[0].Message.Text,
