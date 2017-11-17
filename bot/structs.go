@@ -58,14 +58,38 @@ type Recipient struct {
 	ID string `json:"id"`
 }
 
-// ReturnStruct struct
-type ReturnStruct struct {
-	MessagingType string        `json:"messaging_type"`
-	Recipient     Sender        `json:"recipient"`
-	Message       ReturnMessage `json:"message"`
+// FBReturnStruct struct
+type FBReturnStruct struct {
+	MessagingType string          `json:"messaging_type"`
+	Recipient     Sender          `json:"recipient"`
+	Message       FBReturnMessage `json:"message"`
 }
 
-// ReturnMessage struct
-type ReturnMessage struct {
+// FBReturnMessage struct
+type FBReturnMessage struct {
 	Text string `json:"text"`
+}
+
+//DialogFlowForward struct
+type DialogFlowQuery struct {
+	Language  string `json:"lang"`
+	Message   string `json:"query"`
+	SessionID string `json:"sessionId"`
+}
+
+//DialogFlowRespomse struct
+type DialogFlowResponse struct {
+	Result    DialogFlowResult `json:"result"`
+	SessionID string           `json:"sessionId"`
+}
+
+type DialogFlowResult struct {
+	Parameters DialogFlowParameters `json:"result"`
+	Score      float32              `json:"score"`
+}
+
+type DialogFlowParameters struct {
+	Amount         float32 `json:"amount"`
+	BaseCurrency   string  `json:"currency-from"`
+	TargetCurrency string  `json:"currency-to"`
 }
