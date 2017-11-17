@@ -56,7 +56,6 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 
 	query, err := parseQuery(message)
 	if err != nil {
-		fmt.Print(err)
 		api.ErrorWithJSON(w, "Internal error", http.StatusInternalServerError)
 		return
 	}
