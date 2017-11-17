@@ -55,13 +55,16 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 	}
 
 	query, err := parseQuery(message)
-
 	if err != nil {
 		api.ErrorWithJSON(w, "Internal error", http.StatusInternalServerError)
 		return
 	}
 
-	// TODO: DO CONVERTIONS++ HERE WITH "query" STRUCT
+	user, err := FBGetUser(query.SessionID)
+	if err != nil {
+		api.ErrorWithJSON(w, "Internal error", http.StatusInternalServerError)
+		return
+	}
 
 	var data FBReturnStruct
 
@@ -70,7 +73,7 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 	if query.Result.Score == 0 {
 		recipe := FindRecipe("404")
 		routeData := RouterData{
-			Data: map[string]string{"username": "Bjarte"},
+			Data: map[string]string{"username": user.FirstName},
 		}
 		fmt.Println(routeData.Data["username"])
 		// routeData.Data["username"] = "Bjarte"
@@ -150,4 +153,29 @@ func sendResponse(ret FBReturnStruct) {
 	}
 
 	json.NewDecoder(res.Body).Decode(&result)
+}
+
+func FBGetUser(id string) (FBUser, error) {
+	url := "https://graph.facebook.com/v2.6/" + id
+
+	var result FBUser
+	var err error
+	var Client = &http.Client{}
+
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return result, err
+	}
+
+	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.Header.Set("Authorization", "Bearer EAAdVwoaYHFgBAEUB6PRttLApccGXpgVxnXYZA3ZBb6r7ijRjkMfxL2B8sCZC6d4kicG5pqocZCZBtVHGxBUxy4qxv1cSn2bt6ZAFyvn4iFagMwpest5YOkFWma0UC1b69rHE19PlpswRipZBXcXA484Tp6Qg1BDasfP4zwvuUjo1wZDZD")
+
+	res, err := Client.Do(req)
+	if err != nil {
+		return result, err
+	}
+
+	json.NewDecoder(res.Body).Decode(&result)
+
+	return result, err
 }
