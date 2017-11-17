@@ -59,7 +59,7 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 	api.WriteJSONResponse(w, data)
 }
 
-func parseQuery(query DialogFlowQuery) {
+func parseQuery(query DialogFlowQuery) DialogFlowResponse {
 
 }
 
