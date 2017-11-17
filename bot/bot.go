@@ -61,7 +61,7 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Print(query.Result)
+	// TODO: DO CONVERTIONS++ HERE WITH "query" STRUCT
 
 	var data FBReturnStruct
 
