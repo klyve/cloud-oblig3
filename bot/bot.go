@@ -63,12 +63,6 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Print(query.Result)
 
-	// output, err := json.MarshalIndent(query, "", "   ")
-	// if err != nil {
-	// 	fmt.Print(err)
-	// 	return
-	// }
-
 	var data FBReturnStruct
 
 	data.MessagingType = "RESPONSE"
