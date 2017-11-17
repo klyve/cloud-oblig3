@@ -1,0 +1,14 @@
+{
+    "name": "test2",
+    "messages": [
+        "Test2, {0}, {1}",
+        "Test2, What a wonderful day, {0}, {1}"
+    ],
+    "triggers": [
+        "hello2"
+    ],
+    "route": [
+        "testFunction1",
+        "testFunction2"
+    ]
+}
