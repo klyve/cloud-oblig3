@@ -86,6 +86,7 @@ type DialogFlowResponse struct {
 // DialogFlowResult struct
 type DialogFlowResult struct {
 	Parameters DialogFlowParameters `json:"parameters"`
+	Metadata   DialogFlowMetadata   `json:"metadata"`
 	Score      float64              `json:"score"`
 }
 
@@ -94,4 +95,8 @@ type DialogFlowParameters struct {
 	Amount         string `json:"amount"`
 	BaseCurrency   string `json:"currency-from"`
 	TargetCurrency string `json:"currency-to"`
+}
+
+type DialogFlowMetadata struct {
+	IntentName string `json:"intentName"`
 }
