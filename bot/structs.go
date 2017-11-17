@@ -85,7 +85,7 @@ type DialogFlowResponse struct {
 
 type DialogFlowResult struct {
 	Parameters DialogFlowParameters `json:"parameters"`
-	Score      float32              `json:"score"`
+	Score      float64              `json:"score"`
 }
 
 type DialogFlowParameters struct {

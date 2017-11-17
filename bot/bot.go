@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/klyve/cloud-oblig3/api"
@@ -62,11 +63,17 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Print(query.Result)
 
+	// output, err := json.MarshalIndent(query, "", "   ")
+	// if err != nil {
+	// 	fmt.Print(err)
+	// 	return
+	// }
+
 	var data FBReturnStruct
 
 	data.MessagingType = "RESPONSE"
 	data.Recipient = fbhook.Entry[0].Messaging[0].Sender
-	data.Message.Text = fbhook.Entry[0].Messaging[0].Message.Text + " in my ass!"
+	data.Message.Text = "The answer is 284." + " I'm " + strconv.FormatFloat(query.Result.Score*100, 'g', 100, 32) + `% certain I understood your question right`
 
 	sendResponse(data)
 
