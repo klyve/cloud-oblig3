@@ -60,7 +60,7 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Print(query)
+	fmt.Print(query.Result)
 
 	var data FBReturnStruct
 
@@ -77,7 +77,7 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 func parseQuery(query DialogFlowQuery) (DialogFlowResponse, error) {
 	data := new(bytes.Buffer)
 	var result DialogFlowResponse
-	var err error = nil
+	var err error
 	var Client = &http.Client{}
 
 	json.NewEncoder(data).Encode(query)
@@ -136,7 +136,4 @@ func sendResponse(ret FBReturnStruct) {
 	}
 
 	json.NewDecoder(res.Body).Decode(&result)
-
-	fmt.Print(result)
-
 }

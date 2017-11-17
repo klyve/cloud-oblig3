@@ -84,12 +84,12 @@ type DialogFlowResponse struct {
 }
 
 type DialogFlowResult struct {
-	Parameters DialogFlowParameters `json:"result"`
+	Parameters DialogFlowParameters `json:"parameters"`
 	Score      float32              `json:"score"`
 }
 
 type DialogFlowParameters struct {
-	Amount         float32 `json:"amount"`
-	BaseCurrency   string  `json:"currency-from"`
-	TargetCurrency string  `json:"currency-to"`
+	Amount         string `json:"amount"`
+	BaseCurrency   string `json:"currency-from"`
+	TargetCurrency string `json:"currency-to"`
 }
