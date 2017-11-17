@@ -16,17 +16,13 @@ var database *mgo.Database
 func Init(router *mux.Router, db *mgo.Database) {
 	database = db
 
-	// router.HandleFunc("/exchange/", GetExchange).Methods("GET")
 	LoadRecipes()
 	CreateRoutes()
 	recipe := FindRecipe("hello")
 	Route(recipe)
-	router.HandleFunc("/bot/", FacebookWebHook).Methods("POST")
-	router.HandleFunc("/bot/", HelloBot).Methods("GET")
 
 	router.HandleFunc("/bot", FacebookWebHook).Methods("POST")
 	router.HandleFunc("/bot", HelloBot).Methods("GET")
-
 }
 
 // FacebookWebHook handler for Facebook Webook events
