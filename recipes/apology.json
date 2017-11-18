@@ -1,0 +1,15 @@
+{
+    "name": "apology",
+    "messages": [
+        "np {0}",
+        "All good",
+        "We're good {0}",
+        "Don't sweat it, pass that joint already"
+    ],
+    "triggers": [
+        "apology"
+    ],
+    "route": [
+      "replaceUsername"
+    ]
+}
