@@ -1,0 +1,12 @@
+{
+    "name": "test_advance",
+    "messages": [
+        "Give me something to work with {0}"
+    ],
+    "triggers": [
+        "test_advance"
+    ],
+    "route": [
+        "replaceUsername"
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "name": "test_basic",
+    "messages": [
+        "Hello World"
+    ],
+    "triggers": [
+        "test_basic"
+    ],
+    "route": [
+        "replaceUsername"
+    ]
+}

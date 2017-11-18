@@ -1,0 +1,13 @@
+{
+    "name": "test_multi",
+    "messages": [
+        "{0} {1} to {2} is {3}"
+    ],
+    "triggers": [
+        "test_multi"
+    ],
+    "route": [
+        "verifyCurrencyRequest",
+        "replaceCurrency"
+    ]
+}

@@ -14,10 +14,10 @@ var callRoutes map[string]func(RouterData) RouterData
 
 func CreateRoutes() {
 	callRoutes = map[string]func(RouterData) RouterData{
-		"replaceUsername":       replaceUsername,
-		"findLatest":            findLatest,
-		"replaceCurrency":       replaceCurrency,
-		"verifyCurrencyRequest": verifyCurrencyRequest,
+		"replaceUsername":       ReplaceUsername,
+		"findLatest":            FindLatest,
+		"replaceCurrency":       ReplaceCurrency,
+		"verifyCurrencyRequest": VerifyCurrencyRequest,
 	}
 }
 
@@ -50,14 +50,22 @@ func ReplaceCtx(message string, num int, ctx string) string {
 	return re.ReplaceAllString(message, ctx)
 }
 
-func replaceUsername(data RouterData) RouterData {
+func ReplaceUsername(data RouterData) RouterData {
 	data.Message = ReplaceCtx(data.Message, data.Count, data.Data["username"])
 	data.Count++
 	return data
 }
 
-func findLatest(data RouterData) RouterData {
-	curr := currency.FetchLatest()
+func FindLatest(data RouterData) RouterData {
+	var curr currency.DataList
+	err2 := database.C("currency").Find(nil).Sort("-_id").One(&curr)
+
+	if err2 != nil {
+		data.Error = true
+		data.ErrorTo = "500"
+
+		return data
+	}
 
 	value := curr.From(data.Data["currency-from"]).To(data.Data["currency-to"])
 
@@ -79,7 +87,7 @@ func findLatest(data RouterData) RouterData {
 	return data
 }
 
-func replaceCurrency(data RouterData) RouterData {
+func ReplaceCurrency(data RouterData) RouterData {
 
 	data.Message = ReplaceCtx(data.Message, data.Count, data.Data["amount"])
 	data.Count++
@@ -94,7 +102,7 @@ func replaceCurrency(data RouterData) RouterData {
 	return data
 }
 
-func verifyCurrencyRequest(data RouterData) RouterData {
+func VerifyCurrencyRequest(data RouterData) RouterData {
 	if data.Data["currency-from"] == "" {
 		data.Error = true
 	}

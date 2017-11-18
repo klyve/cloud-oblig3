@@ -1,0 +1,22 @@
+{
+    "name": "500",
+    "messages": [
+        "I'm sorry señior {0} we did something bad",
+        "Our hamsters are taking a break, please try again in a bit",
+        "Our server bills came in an unknown currency, hold on while we fix this issue",
+        "Hold on we are contacting microsoft support.",
+        "Someone told me this could run on a calculator, he was wrong. Come back in a bit",
+        "Somebody once told me this server was gonna roll me, he was right. Come back in a bit",
+        "There is a fire in our server room, please call the fire department",
+        "They are taking our servers, I need help.. Please?",
+        "I'm sorry i cant he---- you, y-- ar- brki g up",
+        "Help! Someone is forcing me to do this job!",
+        "I am not a computer, I need to have a lunch break. Come back in a bit"
+    ],
+    "triggers": [
+        "500"
+    ],
+    "route": [
+        "replaceUsername"
+    ]
+}
