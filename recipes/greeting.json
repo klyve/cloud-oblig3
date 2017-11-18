@@ -1,0 +1,17 @@
+{
+    "name": "greeting",
+    "messages": [
+        "Hey {0}",
+        "Sup {0}?",
+        "What's happening my man {0}?",
+        "Hey dude, whats up?",
+        "What do you want {0}?",
+        "What can I do you for {0}?"
+    ],
+    "triggers": [
+        "greeting"
+    ],
+    "route": [
+      "replaceUsername"
+    ]
+}

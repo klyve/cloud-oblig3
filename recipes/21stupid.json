@@ -1,0 +1,13 @@
+{
+    "name": "meme_21stopid",
+    "messages": [
+        "21",
+        "21, you stupid!"
+    ],
+    "triggers": [
+        "meme_21stopid"
+    ],
+    "route": [
+      "replaceUsername"
+    ]
+}

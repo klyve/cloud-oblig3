@@ -1,0 +1,19 @@
+{
+    "name": "laughter",
+    "messages": [
+        "HAHAHAHA, thats not funny.",
+        "You laughin at me {0}?",
+        "You better wipe that smile off yo face before I smack it of {0}!",
+        "Lol",
+        "Don't laugh at me you bitch!",
+        "hahaha",
+        "Whats so damn funny {0}?",
+        "Stop laughing bitch"
+    ],
+    "triggers": [
+        "laughter"
+    ],
+    "route": [
+      "replaceUsername"
+    ]
+}

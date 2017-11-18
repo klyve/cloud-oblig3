@@ -21,7 +21,9 @@
         "Say that to my face {0}. Come on! I dare you!",
         "{0}, you what mate?",
         "Said yo mom!",
-        "You better not say that shit to me again {0}"
+        "You better not say that shit to me again {0}",
+        "K.",
+        "Ok."
     ],
     "triggers": [
         "insult"
