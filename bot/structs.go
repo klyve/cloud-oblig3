@@ -19,6 +19,8 @@ type RouterData struct {
 	Message string
 	Count   int
 	Data    map[string]string
+	Error   bool
+	ErrorTo string
 }
 
 // FBWebHook struct for data from Facebook
@@ -86,17 +88,17 @@ type DialogFlowResponse struct {
 
 // DialogFlowResult struct
 type DialogFlowResult struct {
-	Parameters DialogFlowParameters `json:"parameters"`
-	Metadata   DialogFlowMetadata   `json:"metadata"`
-	Score      float64              `json:"score"`
+	Parameters map[string]string  `json:"parameters"`
+	Metadata   DialogFlowMetadata `json:"metadata"`
+	Score      float64            `json:"score"`
 }
 
 // DialogFlowParameters struct
-type DialogFlowParameters struct {
-	Amount         string `json:"amount"`
-	BaseCurrency   string `json:"currency-from"`
-	TargetCurrency string `json:"currency-to"`
-}
+// type DialogFlowParameters struct {
+// 	Amount         string `json:"amount"`
+// 	BaseCurrency   string `json:"currency-from"`
+// 	TargetCurrency string `json:"currency-to"`
+// }
 
 type DialogFlowMetadata struct {
 	IntentName string `json:"intentName"`

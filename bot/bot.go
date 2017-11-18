@@ -69,45 +69,68 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 
 	data.MessagingType = "RESPONSE"
 	data.Recipient = fbhook.Entry[0].Messaging[0].Sender
-	if query.Result.Score == 0 {
-		recipe := FindRecipe("404")
-		routeData := RouterData{
-			Data: map[string]string{"username": user.FirstName},
-		}
-		fmt.Println(routeData.Data["username"])
-		// routeData.Data["username"] = "Bjarte"
-		msg := Route(recipe, routeData)
-		data.Message.Text = msg.Message
-		// data.Message.Text = "I have no idea what you are talking about you goon."
-	} else if query.Result.Parameters.TargetCurrency == "" {
-		recipe := FindRecipe("405")
-		routeData := RouterData{
-			Data: map[string]string{"username": user.FirstName},
-		}
-		fmt.Println(routeData.Data["username"])
-		// routeData.Data["username"] = "Bjarte"
-		msg := Route(recipe, routeData)
-		data.Message.Text = msg.Message
-		// data.Message.Text = "I have no idea what you are talking about you goon."
-	} else {
-		recipe := FindRecipe(query.Result.Metadata.IntentName)
-		if recipe.Name == "" {
-			data.Message.Text = "No recipe for this"
-		} else {
-			routesData := RouterData{
-				Data: map[string]string{
-					"username":       user.FirstName,
-					"baseCurrency":   query.Result.Parameters.BaseCurrency,
-					"targetCurrency": query.Result.Parameters.TargetCurrency,
-					"amount":         query.Result.Parameters.Amount,
-				},
-			}
-			msg := Route(recipe, routesData)
-			data.Message.Text = msg.Message
-			// data.Message.Text = "The answer is 284." + " I'm " + strconv.FormatFloat(query.Result.Score*100, 'g', 100, 32) + `% certain I understood your question right`
-		}
 
+	recipeName := "404"
+	if query.Result.Score > 0 {
+		recipeName = query.Result.Metadata.IntentName
 	}
+
+	recipe := FindRecipe(recipeName)
+	if recipe.Name == "" {
+		data.Message.Text = "No recipe for this"
+	} else {
+		routesData := RouterData{
+			Data: map[string]string{
+				"username": user.FirstName,
+			},
+		}
+		for k, v := range query.Result.Parameters {
+			routesData.Data[k] = v
+		}
+		fmt.Println(routesData)
+		msg := Route(recipe, routesData)
+		data.Message.Text = msg.Message
+	}
+
+	// if query.Result.Score == 0 {
+	// 	recipe := FindRecipe("404")
+	// 	routeData := RouterData{
+	// 		Data: map[string]string{"username": user.FirstName},
+	// 	}
+	// 	fmt.Println(routeData.Data["username"])
+	// 	// routeData.Data["username"] = "Bjarte"
+	// 	msg := Route(recipe, routeData)
+	// 	data.Message.Text = msg.Message
+	// 	// data.Message.Text = "I have no idea what you are talking about you goon."
+	// } else if query.Result.Metadata.IntentName == "exchange" &&
+	// 	query.Result.Parameters["currency-to"] == "" {
+	// 	recipe := FindRecipe("405")
+	// 	routeData := RouterData{
+	// 		Data: map[string]string{"username": user.FirstName},
+	// 	}
+	// 	fmt.Println(routeData.Data["username"])
+	// 	// routeData.Data["username"] = "Bjarte"
+	// 	msg := Route(recipe, routeData)
+	// 	data.Message.Text = msg.Message
+	// 	// data.Message.Text = "I have no idea what you are talking about you goon."
+	// } else {
+	// 	recipe := FindRecipe(query.Result.Metadata.IntentName)
+	// 	if recipe.Name == "" {
+	// 		data.Message.Text = "No recipe for this"
+	// 	} else {
+	// 		routesData := RouterData{
+	// 			Data: map[string]string{
+	// 				"username":       user.FirstName,
+	// 				"baseCurrency":   query.Result.Parameters["currency-from"],
+	// 				"targetCurrency": query.Result.Parameters["currency-to"],
+	// 				"amount":         query.Result.Parameters["amount"],
+	// 			},
+	// 		}
+	// 		msg := Route(recipe, routesData)
+	// 		data.Message.Text = msg.Message
+	// 	}
+
+	// }
 
 	sendResponse(data)
 

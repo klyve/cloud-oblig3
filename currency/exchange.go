@@ -1,5 +1,7 @@
 package currency
 
+import "fmt"
+
 // From sets the base value of a currency
 func (data DataList) From(name string) DataList {
 	return data.As(name)
@@ -7,12 +9,18 @@ func (data DataList) From(name string) DataList {
 
 // To returns the value from a currency to another
 func (data DataList) To(name string) Convertion {
+	var rate float32
+	rate = 1.0
+	if data.Base != name {
+		rate = data.Rates[name]
+	}
+
 	return Convertion{
 		From:      data.Base,
 		FromValue: 1.0,
 		To:        name,
-		ToValue:   data.Rates[name],
-		Rate:      data.Rates[name],
+		ToValue:   rate,
+		Rate:      rate,
 	}
 }
 
@@ -35,6 +43,7 @@ func (data DataList) As(name string) DataList {
 		data.Rates[key] = 1 * GetRates(baseValue, value)
 	}
 	delete(data.Rates, name)
+	fmt.Println(data.Rates)
 
 	return data
 }

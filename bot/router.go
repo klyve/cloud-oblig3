@@ -7,18 +7,17 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/klyve/cloud-oblig2/currency"
+	"github.com/klyve/cloud-oblig3/currency"
 )
 
 var callRoutes map[string]func(RouterData) RouterData
 
 func CreateRoutes() {
 	callRoutes = map[string]func(RouterData) RouterData{
-		"testFunction1":   testFunction1,
-		"testFunction2":   testFunction2,
-		"replaceUsername": replaceUsername,
-		"findLatest":      findLatest,
-		"replaceCurrency": replaceCurrency,
+		"replaceUsername":       replaceUsername,
+		"findLatest":            findLatest,
+		"replaceCurrency":       replaceCurrency,
+		"verifyCurrencyRequest": verifyCurrencyRequest,
 	}
 }
 
@@ -27,13 +26,16 @@ func Route(recipe Recipe, data RouterData) RouterData {
 	message := recipe.Messages[rand.Intn(len(recipe.Messages))]
 	data.Message = message
 	data.Count = 0
-	// data := RouterData{
-	// 	Message: message,
-	// 	Count:   0,
-	// }
+	data.Error = false
+	data.ErrorTo = ""
+
 	for _, route := range recipe.Route {
 		if callRoutes[route] != nil {
 			data = callRoutes[route](data)
+		}
+		if data.Error {
+			res := FindRecipe(data.ErrorTo)
+			return Route(res, data)
 		}
 	}
 	return data
@@ -57,7 +59,7 @@ func replaceUsername(data RouterData) RouterData {
 func findLatest(data RouterData) RouterData {
 	curr := currency.FetchLatest()
 
-	value := curr.From(data.Data["baseCurrency"]).To(data.Data["targetCurrency"])
+	value := curr.From(data.Data["currency-from"]).To(data.Data["currency-to"])
 
 	var amount string
 
@@ -82,9 +84,9 @@ func replaceCurrency(data RouterData) RouterData {
 	data.Message = ReplaceCtx(data.Message, data.Count, data.Data["amount"])
 	data.Count++
 
-	data.Message = ReplaceCtx(data.Message, data.Count, data.Data["baseCurrency"])
+	data.Message = ReplaceCtx(data.Message, data.Count, data.Data["currency-from"])
 	data.Count++
-	data.Message = ReplaceCtx(data.Message, data.Count, data.Data["targetCurrency"])
+	data.Message = ReplaceCtx(data.Message, data.Count, data.Data["currency-to"])
 	data.Count++
 	data.Message = ReplaceCtx(data.Message, data.Count, data.Data["rate"])
 	data.Count++
@@ -92,14 +94,15 @@ func replaceCurrency(data RouterData) RouterData {
 	return data
 }
 
-func testFunction1(data RouterData) RouterData {
-	data.Message = ReplaceCtx(data.Message, data.Count, "TestFunction1")
-	data.Count++
-	return data
-}
-
-func testFunction2(data RouterData) RouterData {
-	data.Message = ReplaceCtx(data.Message, data.Count, "TestFunction2")
-	data.Count++
+func verifyCurrencyRequest(data RouterData) RouterData {
+	if data.Data["currency-from"] == "" {
+		data.Error = true
+	}
+	if data.Data["currency-to"] == "" {
+		data.Error = true
+	}
+	if data.Error {
+		data.ErrorTo = "405"
+	}
 	return data
 }
