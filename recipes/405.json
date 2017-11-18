@@ -2,7 +2,8 @@
     "name": "405",
     "messages": [
         "Give me two currencies {0}",
-        "I can't deal with only 1 currency {0}"
+        "I can't deal with only one currency {0}!",
+        "You tryna fool me? Or you just plain stupid? I need two of them..."
     ],
     "triggers": [
         "405"
