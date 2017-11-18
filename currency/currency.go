@@ -7,8 +7,8 @@ import (
 	"net/http"
 )
 
-// FormatJsonResponse currency
-func FormatJsonResponse(data []byte) DataList {
+// FormatJSONResponse currency
+func FormatJSONResponse(data []byte) DataList {
 	var jsontype DataList
 	jsonError := json.Unmarshal(data, &jsontype)
 	if jsonError != nil {
@@ -23,7 +23,7 @@ func FetchLatest() DataList {
 	if err != nil {
 		fmt.Println("Some error ")
 	}
-	resp := FormatJsonResponse(body)
+	resp := FormatJSONResponse(body)
 	return resp
 }
 
