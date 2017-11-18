@@ -21,7 +21,7 @@
         "I didn't get that {0}, you idiot!",
         "What the fuck man, eat a Snickers...",
         "{0}, you have no game",
-        "I don't get ya style {0}",
+        "I don't get yo style {0}",
         "{0}... why you textin me this shit?",
         "Ain't got time for this {0}!",
         "{0}! You fuck up the flow man...",
@@ -32,7 +32,10 @@
         "Who thaught you how to write {0}, you illiterate idiot.",
         "{0}, go back school!",
         "{0}, were you homeschooled or something?",
-        "I do money {0}, not that shit..."
+        "I do money {0}, not that shit...",
+        "I'm all bout that money {0}, not whatever that means...",
+        "{0}! Ask me a question bout that money dude",
+        "How not to productive 101"
     ],
     "triggers": [
         "404"
