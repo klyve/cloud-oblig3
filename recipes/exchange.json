@@ -11,12 +11,12 @@
         "I can do this all day! {0} {1} to {2} is {3}",
         "{0} {1} is {3} {2} of course stupid",
         "You don't even know what {0} {1} is in {2}? Well its {3} stupid",
-        "3 + 3 is 4 - 1 thats {3}. Quick Maths!",
+        "2 + 2 is 4 - 1 thats {3}. Quick Maths!",
         "Its {3}, do you even have to ask?",
         "Got it! {0} {1} to {2} is {3}",
         "Lemme find that shit! {0} {1} to {2}? {3}, easy answer.",
         "{0} {1} to {2} is {3}, was that so hard?",
-        "{0} {1} to {2}... Beep boop beep... Ehm, that would be  {3}"
+        "{0} {1} to {2}? Ehm, that would be {3}"
     ],
     "triggers": [
         "exchange"
