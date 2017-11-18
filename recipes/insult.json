@@ -6,7 +6,7 @@
         "You wanna go {0}?!",
         "Why so rude man?",
         "Ya dad should have pulled out earlier...",
-        "Ya mom should've swallowed you...",
+        "Ya mom should've swallowed you {0}...",
         "You’re the reason ya mom swallows now.",
         "{0}, go fuck urself, but I’m pretty sure you’d be disappointed.",
         "{0} calm the fuck down",
@@ -16,7 +16,12 @@
         "{0}, fuck off outta here!",
         "You have more dick in ya personality than in ya pants!",
         "How the fuck are you the sperm that won??",
-        "butthurt mutch?"
+        "butthurt mutch?",
+        "Don't swear at me {0} you bitch",
+        "Say that to my face {0}. Come on! I dare you!",
+        "{0}, you what mate?",
+        "Said you mom!",
+        "You better not say that shit to me again {0}"
     ],
     "triggers": [
         "insult"

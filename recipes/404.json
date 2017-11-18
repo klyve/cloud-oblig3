@@ -1,7 +1,7 @@
 {
     "name": "404",
     "messages": [
-        "You fool, What are you talking about {0}?",
+        "Speak English {0}?",
         "You're an idiot {0}",
         "What the fuck are you doing {0} ??",
         "{0}, you trippin' fool!",
@@ -27,7 +27,11 @@
         "{0}! You fuck up the flow man...",
         "{0}, you're so dumb man",
         "I'm soo done with your shit {0}",
-        "Give me something to work with {0}..."
+        "Give me something to work with {0}...",
+        "English motherfucker! Do you speak it?",
+        "Who thaught you how to write {0}, you illiterate idiot.",
+        "{0}, go back school!",
+        "{0}, were you homeschooled or something?"
     ],
     "triggers": [
         "404"
