@@ -1,0 +1,27 @@
+{
+    "name": "insult",
+    "messages": [
+        "Well, fuck you too!",
+        "Fuck you!",
+        "You wanna go {0}?!",
+        "Why so rude man?",
+        "Ya dad should have pulled out earlier...",
+        "Ya mom should've swallowed you...",
+        "You’re the reason ya mom swallows now.",
+        "{0}, go fuck urself, but I’m pretty sure you’d be disappointed.",
+        "{0} calm the fuck down",
+        "Dumbass",
+        "You're such an idiot",
+        "I'm straight outta compton, AND ya mum",
+        "Fuck off outta here!",
+        "You have more dick in ya personality than in ya pants!",
+        "How the fuck are you the sperm that won??",
+        "butthurt mutch?"
+    ],
+    "triggers": [
+        "insult"
+    ],
+    "route": [
+      "replaceUsername"
+    ]
+}
