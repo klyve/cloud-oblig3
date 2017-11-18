@@ -1,0 +1,13 @@
+{
+    "name": "405",
+    "messages": [
+        "Give me two currencies {0}",
+        "I can't deal with only 1 currency {0}"
+    ],
+    "triggers": [
+        "405"
+    ],
+    "route": [
+        "replaceUsername"
+    ]
+}

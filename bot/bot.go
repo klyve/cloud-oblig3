@@ -79,8 +79,17 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 		msg := Route(recipe, routeData)
 		data.Message.Text = msg.Message
 		// data.Message.Text = "I have no idea what you are talking about you goon."
+	} else if query.Result.Parameters.TargetCurrency == "" {
+		recipe := FindRecipe("405")
+		routeData := RouterData{
+			Data: map[string]string{"username": user.FirstName},
+		}
+		fmt.Println(routeData.Data["username"])
+		// routeData.Data["username"] = "Bjarte"
+		msg := Route(recipe, routeData)
+		data.Message.Text = msg.Message
+		// data.Message.Text = "I have no idea what you are talking about you goon."
 	} else {
-
 		recipe := FindRecipe(query.Result.Metadata.IntentName)
 		if recipe.Name == "" {
 			data.Message.Text = "No recipe for this"
