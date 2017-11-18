@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/klyve/cloud-oblig2/currency"
+	"github.com/klyve/cloud-oblig3/currency"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )

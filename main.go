@@ -8,9 +8,9 @@ import (
 
 	"github.com/caarlos0/env"
 	"github.com/gorilla/mux"
-	"github.com/klyve/cloud-oblig2/api"
-	"github.com/klyve/cloud-oblig2/cron"
+	"github.com/klyve/cloud-oblig3/api"
 	"github.com/klyve/cloud-oblig3/bot"
+	"github.com/klyve/cloud-oblig3/cron"
 	"gopkg.in/mgo.v2"
 )
 

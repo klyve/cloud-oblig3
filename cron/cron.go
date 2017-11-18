@@ -5,10 +5,10 @@ import (
 
 	"gopkg.in/mgo.v2/bson"
 
-	"github.com/klyve/cloud-oblig2/api"
-	"github.com/klyve/cloud-oblig2/currency"
-
+	"github.com/klyve/cloud-oblig3/api"
+	"github.com/klyve/cloud-oblig3/currency"
 	"github.com/robfig/cron"
+
 	"gopkg.in/mgo.v2"
 )
 

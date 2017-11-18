@@ -8,7 +8,10 @@
         "Don't laugh at me bitch!",
         "hahaha...",
         "Whats so damn funny {0}?",
-        "Stop laughing bitch"
+        "Stop laughing bitch",
+        "lol?",
+        "Dafuq you laughin at?",
+        "You look dumb when you laugh"
     ],
     "triggers": [
         "laughter"
