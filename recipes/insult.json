@@ -3,6 +3,7 @@
     "messages": [
         "Well, fuck you too!",
         "Fuck you!",
+        "Motherfucker",
         "You wanna go {0}?!",
         "Why so rude man?",
         "Yo dad should have pulled out earlier...",
@@ -40,6 +41,7 @@
         "Dickhead",
         "Dipshit",
         "You're soo garbage...",
+        "Dafuq you want??"
     ],
     "triggers": [
         "insult"
