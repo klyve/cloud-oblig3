@@ -3,7 +3,7 @@
     "messages": [
       "Just ask me something like this: 'What is 200 norwegian kroner in euro?'",
       "Is this so hard: 'What's the current rate between NOK and SEK?' ??",
-      "'100 USD to SEK?'... that simple!",
+      "'100 USD to SEK?'... that simple!"
     ],
     "triggers": [
         "help"
