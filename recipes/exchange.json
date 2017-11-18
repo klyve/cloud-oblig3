@@ -16,7 +16,7 @@
         "Got it! {0} {1} to {2} is {3}",
         "Lemme find that shit! {0} {1} to {2}? {3}, easy answer.",
         "{0} {1} to {2} is {3}, was that so hard?",
-        "{0} {1} to {2}... Beep boop beep... Ehm, that would be  {3}"
+        "{0} {1} to {2}... Beep boop beep... Ehm, that would be {3}"
     ],
     "triggers": [
         "exchange"
