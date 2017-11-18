@@ -6,7 +6,7 @@
         "All good {0}",
         "We're good {0}",
         "np {0}, let's move on",
-        "Don't sweat it, pass that joint already"
+        "Don't sweat it, pass that j already"
     ],
     "triggers": [
         "apology"

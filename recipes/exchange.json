@@ -4,7 +4,7 @@
         "{0} {1} to {2} is {3}, ez",
         "{0} {1} to {2} is {3}, real easy",
         "Easy maths, {0} {1} to {2} is {3}",
-        "Bro... it's obviously {3}! quick maths",
+        "Bro... it's obviously {3}",
         "It's {3}. Nailed it!",
         "{0} {1} to {2}? {3} booy!",
         "{3} Let's go! Money all day every day 🤑",
@@ -17,7 +17,8 @@
         "Lemme find that shit! {0} {1} to {2}? {3}, easy answer.",
         "{0} {1} to {2} is {3}, was that so hard?",
         "{0} {1} to {2}? Ehm, that would be {3}",
-        "Should be about {3}"
+        "Should be about {3}",
+        "Skrrat! It's {3}!"
     ],
     "triggers": [
         "exchange"

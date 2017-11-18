@@ -1,0 +1,31 @@
+{
+    "name": "meme_skrrat",
+    "messages": [
+        "Yo, Big Shaq, the one and only",
+        "Man's not hot, never hot",
+        "Two plus two is four, minus one that's three, quick maths",
+        "Everyday man's on the block, smoke trees",
+        "The girl told me, 'Take off your jacket'",
+
+        "The ting goes skrrrahh, pap, pap, ka-ka-ka",
+        "The ting goes skrrrahh, pap, pap, ka-ka-ka",
+        "Skidiki-pap-pap, and a pu-pu-pudrrrr-boom",
+        "Skidiki-pap-pap, and a pu-pu-pudrrrr-boom",
+        "Skya, du-du-ku-ku-dun-dun",
+        "Poom, poom, you dun know",
+
+        "The ting goes skrrrahh, pap, pap, ka-ka-ka Skidiki-pap-pap, and a pu-pu-pudrrrr-boom Skya, du-du-ku-ku-dun-dunPoom, poom, you dun know",
+        "The ting goes skrrrahh, pap, pap, ka-ka-ka Skidiki-pap-pap, and a pu-pu-pudrrrr-boom Skya, du-du-ku-ku-dun-dunPoom, poom, you dun know",
+        "The ting goes skrrrahh, pap, pap, ka-ka-ka Skidiki-pap-pap, and a pu-pu-pudrrrr-boom Skya, du-du-ku-ku-dun-dunPoom, poom, you dun know",
+
+        "Your girl knows I've got the sauce, no ketchup, raw sauce, Ah, yo, boom, ah",
+        "Your girl knows I've got the sauce, no ketchup, raw sauce, Ah, yo, boom, ah",
+        
+    ],
+    "triggers": [
+        "meme_skrrat"
+    ],
+    "route": [
+      "replaceUsername"
+    ]
+}

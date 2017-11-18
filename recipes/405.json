@@ -3,11 +3,12 @@
     "messages": [
         "Give me two currencies {0}",
         "Two currencies, pls",
-        "How the fuck would you do that?",
+        "What does that even mean?",
         "I can't deal with only one currency {0}!",
         "You tryna fool me? Or you just plain stupid? I need two of them...",
         "I need two of them...",
-        "How can i find the rate between one currency? You stupid?"
+        "How can i find the rate between one currency? You stupid?",
+        "I only deal with 2 currencies"
     ],
     "triggers": [
         "405"
