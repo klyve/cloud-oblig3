@@ -2,10 +2,12 @@
     "name": "greeting",
     "messages": [
         "Hey {0}",
+        "Heeyy {0}",
         "Sup {0}?",
-        "What's happening my man {0}?",
+        "Yoo, what's happening my man {0}?",
         "Hey dude, whats up?",
         "What do you want {0}?",
+        "Heey {0}, anything you need?",
         "What can I do you for {0}?"
     ],
     "triggers": [

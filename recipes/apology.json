@@ -3,7 +3,9 @@
     "messages": [
         "np {0}",
         "All good",
+        "All good {0}",
         "We're good {0}",
+        "np {0}, let's move on",
         "Don't sweat it, pass that joint already"
     ],
     "triggers": [
