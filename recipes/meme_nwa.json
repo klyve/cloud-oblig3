@@ -1,0 +1,23 @@
+{
+    "name": "meme_nwa",
+    "messages": [
+        "You are now about to witness the strength of street knowledge",
+        "Straight outta Compton, crazy motherfucker named Ice Cube",
+        "From the gang called N***as With Attitudes",
+        "Straight outta Compton, another crazy ass n**ga",
+        "Word to the motherfucker, straight outta Compton",
+        "Fuck the police! Comin' straight from the underground",
+        "Pull your goddamn ass over right now! Aww shit, now, what the fuck you pullin' me over for? Cause I feel like it! Just sit your ass on the curb and shut the fuck up! Man, fuck this shit! A'ight, smartass, I'm taking your black ass to jail!",
+        "Fuck tha police!",
+        "Fuck tha police!",
+        "Fuck tha police!"
+
+
+    ],
+    "triggers": [
+        "meme_nwa"
+    ],
+    "route": [
+      "replaceUsername"
+    ]
+}
