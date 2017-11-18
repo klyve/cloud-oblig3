@@ -5,10 +5,13 @@
         "{0} {1} to {2} is {3}, real easy",
         "Easy maths, {0} {1} to {2} is {3}",
         "Bro... it's obviously {3}! quick maths",
-        "It's {3}. Nailed it",
+        "It's {3}. Nailed it!",
         "{0} {1} to {2}? {3} booy!",
         "{3} Let's go! Money all day every day 🤑",
-        "I can do this all day! {0} {1} to {2} is {3}"
+        "I can do this all day! {0} {1} to {2} is {3}",
+        "Got it! {0} {1} to {2} is {3}"
+        "Lemme find that shit! {0} {1} to {2}? {3}, easy answer."
+        "{0} {1} to {2} is {3}, was that so hard?"
     ],
     "triggers": [
         "exchange"
