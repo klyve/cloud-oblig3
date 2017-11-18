@@ -5,7 +5,7 @@
       "Is this so hard: 'What's the current rate between USD and EUR?' ??",
       "'50 JPY to NOK?'... that simple!",
       "'100 Danish to Swedish?' perhaps?",
-      "This one is dope: 'How much EUR can i get for 100 SEK?'",
+      "This one is dope: 'How much EUR can i get for 100 SEK?'"
     ],
     "triggers": [
         "help"
