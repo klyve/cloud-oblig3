@@ -162,6 +162,7 @@ func sendResponse(ret FBReturnStruct) {
 	json.NewDecoder(res.Body).Decode(&result)
 }
 
+// FBGetUser gets a user based on an id
 func FBGetUser(id string) (FBUser, error) {
 	url := "https://graph.facebook.com/v2.6/" + id
 

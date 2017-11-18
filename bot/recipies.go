@@ -10,6 +10,7 @@ import (
 
 var recipeList map[string]Recipe
 
+// LoadRecipeFile Loads a recipe file
 func LoadRecipeFile(path string) Recipe {
 
 	file, e := ioutil.ReadFile(path)
@@ -23,6 +24,8 @@ func LoadRecipeFile(path string) Recipe {
 	}
 	return jsontype
 }
+
+// LoadRecipes Loads recipes
 func LoadRecipes() {
 	recipeList = make(map[string]Recipe)
 	files, err := filepath.Glob("./recipes/*")
@@ -36,6 +39,7 @@ func LoadRecipes() {
 
 }
 
+// FindRecipe Finds recepies
 func FindRecipe(trigger string) Recipe {
 	for key := range recipeList {
 		triggers := recipeList[key].Triggers

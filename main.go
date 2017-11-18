@@ -14,6 +14,7 @@ import (
 	"gopkg.in/mgo.v2"
 )
 
+// Config struct for db and port config
 type Config struct {
 	Port            int    `env:"PORT" envDefault:"3000"`
 	MongoDBHost     string `env:"MONGODB_HOST" envDefault:"localhost"`
@@ -71,9 +72,9 @@ func Init(prod bool) {
 	fmt.Println(cfg.Port)
 
 	router.HandleFunc("/", GetHomePage).Methods("GET")
-	mongoUri := createMongoDBURI(cfg)
-	fmt.Println(mongoUri)
-	session, err := mgo.Dial(mongoUri)
+	mongoURI := createMongoDBURI(cfg)
+	fmt.Println(mongoURI)
+	session, err := mgo.Dial(mongoURI)
 	if err != nil {
 		log.Fatal("Could not connect to the database")
 	}
