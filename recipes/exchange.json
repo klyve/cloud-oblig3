@@ -25,6 +25,7 @@
     ],
     "route": [
         "verifyCurrencyRequest",
+        "findLatest",
         "replaceCurrency"
     ]
 }

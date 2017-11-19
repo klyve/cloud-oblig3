@@ -89,6 +89,7 @@ func FacebookWebHook(w http.ResponseWriter, r *http.Request) {
 		}
 		fmt.Println(routesData)
 		msg := Route(recipe, routesData)
+		fmt.Println(msg)
 		data.Message.Text = msg.Message
 	}
 
