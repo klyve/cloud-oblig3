@@ -23,14 +23,6 @@ type Config struct {
 	MongoDBDatabase string `env:"MONGODB_DATABASE" envDefault:"NWA"`
 }
 
-// type config struct {
-// 	Home         string        `env:"HOME"`
-// 	Port         int           `env:"PORT" envDefault:"3000"`
-// 	IsProduction bool          `env:"PRODUCTION"`
-// 	Hosts        []string      `env:"HOSTS" envSeparator:":"`
-// 	Duration     time.Duration `env:"DURATION"`
-// }
-
 // GetHomePage Endpoint
 func GetHomePage(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(w, "Hello world")
@@ -49,6 +41,7 @@ func createMongoDBURI(cfg Config) string {
 	ret += ":" + cfg.MongoDBPassword
 	ret += "@" + cfg.MongoDBHost
 	ret += portAddr
+	ret += "/" + cfg.MongoDBDatabase
 
 	return ret
 }
@@ -75,7 +68,7 @@ func Init(prod bool) {
 	fmt.Println(mongoUri)
 	session, err := mgo.Dial(mongoUri)
 	if err != nil {
-		log.Fatal("Could not connect to the database")
+		log.Fatal("Could not connect to the database on ", mongoUri, err)
 	}
 
 	database := session.DB(cfg.MongoDBDatabase)
