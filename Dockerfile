@@ -30,3 +30,4 @@ ENTRYPOINT /go/bin/cloud-oblig3
 # Document that the service listens on port 8080.
 # Uncomment this for other uses than heroku
 # EXPOSE $PORT
+CMD ["/go/bin/cloud-oblig3"]
