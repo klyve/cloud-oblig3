@@ -69,7 +69,7 @@ func Init(prod bool) {
 	fmt.Println(mongoURI)
 	session, err := mgo.Dial(mongoURI)
 	if err != nil {
-		log.Fatal("Could not connect to the database on ", mongoUri, err)
+		log.Fatal("Could not connect to the database on ", mongoURI, err)
 	}
 
 	database := session.DB(cfg.MongoDBDatabase)
