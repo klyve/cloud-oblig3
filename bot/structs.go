@@ -1,5 +1,6 @@
 package bot
 
+// Recipe contains data from single recipies
 type Recipe struct {
 	Name     string   `json:"name"`
 	Messages []string `json:"messages"`
@@ -7,14 +8,17 @@ type Recipe struct {
 	Route    []string `json:"route"`
 }
 
+// Recipes contains data from the recipies
 type Recipes struct {
 	RecipeList map[string]Recipe
 }
 
+// ErrorInterface contains data about the errors
 type ErrorInterface struct {
 	Message string
 }
 
+// RouterData contains data about the routers
 type RouterData struct {
 	Message string
 	Count   int
@@ -73,7 +77,7 @@ type FBReturnMessage struct {
 	Text string `json:"text"`
 }
 
-// DialogFlowForward struct
+// DialogFlowQuery struct
 type DialogFlowQuery struct {
 	Language  string `json:"lang"`
 	Message   string `json:"query"`
@@ -93,17 +97,12 @@ type DialogFlowResult struct {
 	Score      float64            `json:"score"`
 }
 
-// DialogFlowParameters struct
-// type DialogFlowParameters struct {
-// 	Amount         string `json:"amount"`
-// 	BaseCurrency   string `json:"currency-from"`
-// 	TargetCurrency string `json:"currency-to"`
-// }
-
+// DialogFlowMetadata struct contains data from DialogFlow's metadata
 type DialogFlowMetadata struct {
 	IntentName string `json:"intentName"`
 }
 
+// FBUser struct contains data about facebook user
 type FBUser struct {
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`

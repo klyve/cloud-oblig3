@@ -21,13 +21,13 @@ func Init(db *mgo.Database) {
 	database = db
 
 	c := cron.New()
-	CronJob()
-	c.AddFunc("@every 24h", CronJob)
+	Job()
+	c.AddFunc("@every 24h", Job)
 	c.Start()
 }
 
-// CronJob item
-func CronJob() {
+// Job item
+func Job() {
 	latest := currency.FetchLatest()
 	data := currency.Currency{
 		ID:    bson.NewObjectId(),

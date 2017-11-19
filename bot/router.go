@@ -12,6 +12,7 @@ import (
 
 var callRoutes map[string]func(RouterData) RouterData
 
+// CreateRoutes Creates routes
 func CreateRoutes() {
 	callRoutes = map[string]func(RouterData) RouterData{
 		"replaceUsername":       ReplaceUsername,
@@ -21,6 +22,7 @@ func CreateRoutes() {
 	}
 }
 
+// Route A route
 func Route(recipe Recipe, data RouterData) RouterData {
 	rand.Seed(time.Now().Unix())
 	message := recipe.Messages[rand.Intn(len(recipe.Messages))]
@@ -42,6 +44,7 @@ func Route(recipe Recipe, data RouterData) RouterData {
 
 }
 
+// ReplaceCtx edits a string based on a regex
 func ReplaceCtx(message string, num int, ctx string) string {
 	regex := `\{%v\}`
 	regex = fmt.Sprintf(regex, num)
@@ -50,12 +53,14 @@ func ReplaceCtx(message string, num int, ctx string) string {
 	return re.ReplaceAllString(message, ctx)
 }
 
+// ReplaceUsername replaces a regex with username
 func ReplaceUsername(data RouterData) RouterData {
 	data.Message = ReplaceCtx(data.Message, data.Count, data.Data["username"])
 	data.Count++
 	return data
 }
 
+// FindLatest Finds latest rates
 func FindLatest(data RouterData) RouterData {
 	var curr currency.DataList
 	err2 := database.C("currency").Find(nil).Sort("-_id").One(&curr)
@@ -87,6 +92,7 @@ func FindLatest(data RouterData) RouterData {
 	return data
 }
 
+// ReplaceCurrency replaces regex with currency
 func ReplaceCurrency(data RouterData) RouterData {
 
 	data.Message = ReplaceCtx(data.Message, data.Count, data.Data["amount"])
@@ -102,6 +108,7 @@ func ReplaceCurrency(data RouterData) RouterData {
 	return data
 }
 
+// VerifyCurrencyRequest verifies currency request
 func VerifyCurrencyRequest(data RouterData) RouterData {
 	if data.Data["currency-from"] == "" {
 		data.Error = true

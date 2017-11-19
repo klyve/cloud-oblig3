@@ -165,7 +165,7 @@ func GetWebhookData(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// AverageGetExchangeRates api
+// GetExchange api
 func GetExchange(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello Exchange")
 }

@@ -30,7 +30,7 @@ func TestFormatJson(t *testing.T) {
 		fmt.Printf("File error: %v\n", e)
 		t.Failed()
 	}
-	data := FormatJsonResponse(file)
+	data := FormatJSONResponse(file)
 	if len(data.Rates) != 31 {
 		fmt.Printf("Failed to parse rates expected 31 got %v", len(data.Rates))
 		t.Fail()
@@ -88,7 +88,7 @@ func TestFetchJSONData(t *testing.T) {
 		fmt.Println("Some error ")
 		t.Fail()
 	}
-	data := FormatJsonResponse(body)
+	data := FormatJSONResponse(body)
 	if len(data.Rates) == 0 {
 		fmt.Printf("Failed to parse rates expected 31 got %v", len(data.Rates))
 		t.Fail()
