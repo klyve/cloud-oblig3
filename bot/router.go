@@ -81,10 +81,12 @@ func FindLatest(data RouterData) RouterData {
 		amount = data.Data["amount"]
 	}
 	data.Data["amount"] = amount
-	totalAmount, err := strconv.Atoi(amount)
+	totalAmount, err := strconv.ParseFloat(amount, 32)
 
 	if err != nil {
 		data.Data["rate"] = fmt.Sprintf("%.2f", value.Rate)
+		data.Error = true
+		data.ErrorTo = "404"
 		return data
 	}
 
