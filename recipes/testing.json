@@ -1,0 +1,10 @@
+{
+    "name": "testing",
+    "messages": [],
+    "triggers": [
+        "testing"
+    ],
+    "route": [
+        "routeTesting"
+    ]
+}
